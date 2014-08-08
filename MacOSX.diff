@@ -390,7 +390,7 @@ index 49e76bf..e18e97e 100644
    t_loopInThisThread = NULL;
  }
  
-@@ -108,12 +101,13 @@ void EventLoop::loop()
+@@ -110,12 +103,13 @@ void EventLoop::loop()
    while (!quit_)
    {
      activeChannels_.clear();
@@ -405,7 +405,7 @@ index 49e76bf..e18e97e 100644
      // TODO sort channel by priority
      eventHandling_ = true;
      for (ChannelList::iterator it = activeChannels_.begin();
-@@ -264,7 +258,7 @@ void EventLoop::abortNotInLoopThread()
+@@ -273,7 +267,7 @@ void EventLoop::abortNotInLoopThread()
  void EventLoop::wakeup()
  {
    uint64_t one = 1;
@@ -414,7 +414,7 @@ index 49e76bf..e18e97e 100644
    if (n != sizeof one)
    {
      LOG_ERROR << "EventLoop::wakeup() writes " << n << " bytes instead of 8";
-@@ -274,7 +268,7 @@ void EventLoop::wakeup()
+@@ -283,7 +277,7 @@ void EventLoop::wakeup()
  void EventLoop::handleRead()
  {
    uint64_t one = 1;
