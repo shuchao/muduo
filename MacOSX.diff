@@ -382,6 +382,8 @@ index 49e76bf..e18e97e 100644
  {
    LOG_DEBUG << "EventLoop " << this << " of thread " << threadId_
              << " destructs in thread " << CurrentThread::tid();
+   wakeupChannel_->disableAll();
+   wakeupChannel_->remove();
 -  ::close(wakeupFd_);
 +  ::close(wakeupFd_[0]);
 +  ::close(wakeupFd_[1]);
@@ -460,9 +462,9 @@ index 24db014..13352cc 100644
  
 +#ifndef __MACH__
 +  int herrno = 0;
-   int ret = gethostbyname_r(hostname, &hent, t_resolveBuffer, sizeof t_resolveBuffer, &he, &herrno);
+   int ret = gethostbyname_r(hostname.c_str(), &hent, t_resolveBuffer, sizeof t_resolveBuffer, &he, &herrno);
 +#else
-+  he = gethostbyname(hostname);
++  he = gethostbyname(hostname.c_str());
 +  int ret = 0;
 +#endif
    if (ret == 0 && he != NULL)
@@ -654,6 +656,8 @@ index 9259c01..f6d241d 100644
  
  TimerQueue::~TimerQueue()
  {
+   timerfdChannel_.disableAll();
+   timerfdChannel_.remove();
 -  ::close(timerfd_);
    // do not remove channel, since we're in EventLoop::dtor();
    for (TimerList::iterator it = timers_.begin();
