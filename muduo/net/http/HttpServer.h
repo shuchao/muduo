@@ -62,7 +62,7 @@ class HttpServer : boost::noncopyable
   void onRequest(const TcpConnectionPtr&, const HttpRequest&);
 
   TcpServer server_;
-  HttpCallback httpCallback_;
+  HttpCallback httpCallback_;		//chaoshu: onmessage->onRequest->httpCallback_->real logic
 };
 
 }

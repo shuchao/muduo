@@ -185,7 +185,8 @@ class PubSubServer : boost::noncopyable
     std::map<string, Topic>::iterator it = topics_.find(topic);
     if (it == topics_.end())
     {
-      it = topics_.insert(make_pair(topic, Topic(topic))).first;
+      it = topics_.insert(make_pair(topic, Topic(topic))).first;	//chaoshu:  std::pair<iterator,bool> insert( const value_type& value ); so .first
+
     }
     return it->second;
   }

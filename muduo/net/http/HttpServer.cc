@@ -31,7 +31,7 @@ bool processRequestLine(const char* begin, const char* end, HttpContext* context
 {
   bool succeed = false;
   const char* start = begin;
-  const char* space = std::find(start, end, ' ');
+  const char* space = std::find(start, end, ' ');		//chaoshu: Searches the range [first1,last1) for the first occurrence of the sequence defined by [first2,last2), and returns an iterator to its first element, or last1 if no occurrences are found.
   HttpRequest& request = context->request();
   if (space != end && request.setMethod(start, space))
   {
@@ -89,7 +89,7 @@ bool parseRequest(Buffer* buf, HttpContext* context, Timestamp receiveTime)
         {
           context->request().setReceiveTime(receiveTime);
           buf->retrieveUntil(crlf + 2);
-          context->receiveRequestLine();
+          context->receiveRequestLine();		//chaoshu: change state to ExpectHeader to continue
         }
         else
         {

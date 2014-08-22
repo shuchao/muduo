@@ -83,12 +83,13 @@ uid_t ProcessInfo::uid()
 
 string ProcessInfo::username()
 {
-  struct passwd pwd;
+  struct passwd pwd;		//chaoshu: linux passwd strut
   struct passwd* result = NULL;
   char buf[8192];
   const char* name = "unknownuser";
 
-  getpwuid_r(uid(), &pwd, buf, sizeof buf, &result);
+  getpwuid_r(uid(), &pwd, buf, sizeof buf, &result);	//chaoshu:  The getpwuid() function returns a pointer to a structure containing the broken-out fields of the record in the password database that matches the user ID uid.
+  														// The getpwnam_r() and getpwuid_r() functions obtain the same information as getpwnam() and getpwuid(), but store the retrieved passwd structure in the space pointed to by pwd. The string fields pointed to by the members of the passwd structure are stored in the buffer buf of size buflen. A pointer to the result (in case of success) or NULL (in case no entry was found or an error occurred) is stored in *result.
   if (result)
   {
     name = pwd.pw_name;

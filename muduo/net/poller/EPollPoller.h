@@ -42,7 +42,21 @@ class EPollPoller : public Poller
                           ChannelList* activeChannels) const;
   void update(int operation, Channel* channel);
 
-  typedef std::vector<struct epoll_event> EventList;
+  typedef std::vector<struct epoll_event> EventList;	
+
+	//chaoshu:
+   /*typedef union epoll_data {
+        void *ptr;
+         int fd;
+         __uint32_t u32;
+         __uint64_t u64;
+     } epoll_data_t;//保存触发事件的某个文件描述符相关的数据
+
+     struct epoll_event {
+         __uint32_t events;      // epoll event
+         epoll_data_t data;      // User data variable
+     };
+*/
 
   int epollfd_;
   EventList events_;

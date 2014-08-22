@@ -76,7 +76,7 @@ template<typename T>
 __thread T* ThreadLocalSingleton<T>::t_value_ = 0;
 
 template<typename T>
-typename ThreadLocalSingleton<T>::Deleter ThreadLocalSingleton<T>::deleter_;
+typename ThreadLocalSingleton<T>::Deleter ThreadLocalSingleton<T>::deleter_;	//chaoshu:  template-class's sub class
 
 }
 #endif
