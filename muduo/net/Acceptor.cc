@@ -78,7 +78,7 @@ void Acceptor::handleRead()
     // Read the section named "The special problem of
     // accept()ing when you can't" in libev's doc.
     // By Marc Lehmann, author of livev.
-    if (errno == EMFILE)
+    if (errno == EMFILE)	//chaoshu: when NO fd source, use the backup one and close it, guaratee accept and close complete
     {
       ::close(idleFd_);
       idleFd_ = ::accept(acceptSocket_.fd(), NULL, NULL);
